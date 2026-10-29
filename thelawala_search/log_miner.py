@@ -9,7 +9,7 @@ Extracts customer behavioral signals from search_log.jsonl:
 import json
 import os
 from collections import defaultdict, Counter
-from typing import Dict, Tuple
+from typing import Dict, Tuple, Optional
 
 class SearchLogSignals:
     def __init__(
@@ -40,13 +40,13 @@ class SearchLogSignals:
 
 
 def mine_search_logs(
-    log_path: str = "thelawala-search-data/search_log.jsonl"
+    log_path: Optional[str] = None
 ) -> SearchLogSignals:
     """Parses search_log.jsonl and extracts historical conversion priors."""
     query_sku_scores: Dict[str, Dict[str, float]] = defaultdict(lambda: defaultdict(float))
     global_sku_scores: Dict[str, float] = defaultdict(float)
 
-    if not os.path.exists(log_path):
+    if not log_path or not os.path.exists(log_path):
         return SearchLogSignals({}, {})
 
     with open(log_path, mode="r", encoding="utf-8") as f:

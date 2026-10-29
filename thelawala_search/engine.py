@@ -15,9 +15,9 @@ from thelawala_search.ranker import rank_candidates, RankedResult
 class ThelawalaSearchEngine:
     def __init__(
         self,
-        catalog_path: str = "thelawala-search-data/catalog.csv",
-        inventory_path: str = "thelawala-search-data/inventory.csv",
-        log_path: str = "thelawala-search-data/search_log.jsonl"
+        catalog_path: Optional[str] = None,
+        inventory_path: Optional[str] = None,
+        log_path: Optional[str] = None
     ):
         self.catalog_path = catalog_path
         self.inventory_path = inventory_path
@@ -29,7 +29,7 @@ class ThelawalaSearchEngine:
         self.is_ready = False
 
     def initialize(self) -> None:
-        """Loads data, trains search priors from logs, and builds BM25 index."""
+        """Loads data from catalog and inventory, and builds BM25 index."""
         t0 = time.time()
         print("Loading catalog and inventory...")
         self.products = load_catalog_and_inventory(
@@ -38,9 +38,13 @@ class ThelawalaSearchEngine:
         )
         print(f"Loaded {len(self.products)} active products (discontinued items filtered).")
 
-        print("Mining search logs for behavioral click/cart signals...")
-        self.signals = mine_search_logs(self.log_path)
-        print(f"Mined signals across {len(self.signals.query_sku_scores)} query patterns.")
+        if self.log_path:
+            print(f"Mining search logs from {self.log_path}...")
+            self.signals = mine_search_logs(self.log_path)
+            print(f"Mined signals across {len(self.signals.query_sku_scores)} query patterns.")
+        else:
+            print("Running purely on catalog and inventory datasets.")
+            self.signals = SearchLogSignals({}, {})
 
         print("Building in-memory BM25 index with typo tolerance...")
         self.index.build_index(self.products)
