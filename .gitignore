@@ -13,3 +13,5 @@ env/
 venv/
 *.log
 scratch/
+catalog (1).csv
+inventory.csv
