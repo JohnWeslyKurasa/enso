@@ -4,7 +4,7 @@ High-performance, local product search engine engineered for **Thelawala**—a q
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Requirements & Setup
 - **Python 3.10+** (Tested on Python 3.13)
@@ -48,7 +48,7 @@ Start the local FastAPI web server:
 ```bash
 python web_app.py
 ```
-Open **[http://localhost:8000](http://localhost:8000)** in your browser for a dark-mode glassmorphic search interface featuring search-as-you-type (< 5ms latency), quick preset chips, price indicators, stock badges, and scoring signals.
+Open **[http://localhost:8000](http://localhost:8000)** in your browser for a warm beige and mocha search interface featuring search-as-you-type (< 5ms latency), quick preset chips, price indicators, stock badges, and scoring signals.
 
 #### Option D: Run Test Suite
 ```bash
@@ -59,7 +59,7 @@ python test_search_engine.py
 
 ---
 
-## 🧠 How the Search Engine Works
+## Search Architecture & Pipeline
 
 ```
                                  [ Customer Query ]
@@ -131,7 +131,7 @@ $$\text{Final Score} = S_{\text{BM25}} + S_{\text{exact\_name}} + S_{\text{inten
 
 ---
 
-## ⚖️ Key Decisions and Trade-offs
+## Key Decisions & Trade-offs
 
 | Decision | Trade-off / Rationale |
 |---|---|
@@ -143,7 +143,7 @@ $$\text{Final Score} = S_{\text{BM25}} + S_{\text{exact\_name}} + S_{\text{inten
 
 ---
 
-## 🔮 What to Do Next
+## Future Roadmap
 
 1. **Lightweight Local Embedding Ranker (Cross-Encoder / ONNX):**
    - Incorporate a 20MB local quantized multilingual MiniLM model via ONNX runtime for sub-millisecond semantic re-ranking of the top 50 BM25 candidates.
