@@ -2,6 +2,8 @@
 
 High-performance, local product search engine engineered for **Thelawala**—a quick-commerce grocery delivery platform in Hyderabad. Built to handle colloquial customer vocabulary, mobile typos, intent disambiguation, price filtering, and stock availability with zero external API calls.
 
+**Live Demo:** [https://enso-sigma.vercel.app/](https://enso-sigma.vercel.app/)
+
 ---
 
 ## Quick Start
@@ -44,7 +46,8 @@ python cli.py "venna"
 ```
 
 #### Option C: Interactive Modern Web UI
-Start the local FastAPI web server:
+- **Live Cloud Deployment:** [https://enso-sigma.vercel.app/](https://enso-sigma.vercel.app/)
+- **Local Server:**
 ```bash
 python web_app.py
 ```
